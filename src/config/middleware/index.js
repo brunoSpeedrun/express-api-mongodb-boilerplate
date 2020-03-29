@@ -4,6 +4,7 @@ const compression = require('compression')
 const expressStatusMonitor = require('express-status-monitor')
 const morgan = require('morgan')
 const cors = require('cors')
+const router = require('../router')
 
 module.exports = {
   apply(app) {
@@ -20,5 +21,6 @@ module.exports = {
     app.use(morgan('dev'))
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
+    router.config(app)
   }
 }
