@@ -1,47 +1,63 @@
-let todos = [
-  {
-    id: 1,
-    name: 'Js Course'
-  },
-  {
-    id: 2,
-    name: 'Nestjs Course'
-  }
-]
+const Todo = require('../models/todo')
 
 const todosController = {
-  getTodos(req, res) {
-    res.json(todos)
+  findAll(req, res, next) {
+    Todo.find((err, docs) => {
+      if (err) {
+        next(err)
+      }
+
+      res.json(docs)
+    })
   },
 
-  getById(req, res) {
+  findById(req, res, next) {
     const {
       params: { id }
     } = req
 
-    const todo = todos.find((todo) => todo.id == id)
+    Todo.findById(id, (err, doc) => {
+      if (err) {
+        next(err)
+      }
 
-    if (todo) {
-      res.json(todo)
-    } else {
-      res.sendStatus(404)
-    }
+      if (doc) {
+        res.json(doc)
+      } else {
+        res.sendStatus(404)
+      }
+    })
   },
 
-  deleteById(req, res) {
+  create(req, res, next) {
+    const { body } = req
+
+    const newTodo = new Todo(body)
+    newTodo.save((err, doc) => {
+      if (err) {
+        next(err)
+      }
+
+      res.json(doc)
+    })
+  },
+
+  deleteById(req, res, next) {
     const {
       params: { id }
     } = req
 
-    const length = todos.length
+    Todo.findByIdAndRemove(id, (err, doc) => {
+      if (err) {
+        next(err)
+      }
 
-    todos = todos.filter((todo) => todo.id != id)
-
-    if (todos.length === length) {
-      res.sendStatus(404)
-    } else {
-      res.sendStatus(204)
-    }
+      if (doc) {
+        res.json(doc)
+      } else {
+        res.sendStatus(404)
+      }
+    })
   }
 }
 

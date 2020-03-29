@@ -27,9 +27,9 @@ function controllerRoute(file) {
 module.exports = {
   config(app) {
     const routes = fs
-    .readdirSync(`${__dirname}/routes`)
-    .map(controllerRoute)
-    .filter((x) => x !== null)
+      .readdirSync(`${__dirname}/routes`)
+      .map(controllerRoute)
+      .filter((x) => x !== null)
 
     routes.forEach((route) => app.use(route.path, route.router))
   }

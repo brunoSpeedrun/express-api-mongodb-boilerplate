@@ -8,13 +8,15 @@ const router = require('../router')
 
 module.exports = {
   apply(app) {
-    app.use(cors({
-      allowedHeaders: '*',
-      credentials: true,
-      exposedHeaders: '*',
-      methods: ['GET, POST, PUT, PATCH, DELETE, OPTIONS'],
-      origin: '*'
-    }))
+    app.use(
+      cors({
+        allowedHeaders: '*',
+        credentials: true,
+        exposedHeaders: '*',
+        methods: ['GET, POST, PUT, PATCH, DELETE, OPTIONS'],
+        origin: '*'
+      })
+    )
     app.use(helmet())
     app.use(expressStatusMonitor())
     app.use(compression())

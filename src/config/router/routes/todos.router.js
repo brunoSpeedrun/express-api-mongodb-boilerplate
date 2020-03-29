@@ -6,12 +6,17 @@ module.exports = {
     {
       path: '/',
       method: 'GET',
-      handle: todosController.getTodos
+      handle: todosController.findAll
     },
     {
       path: '/:id',
       method: 'GET',
-      handle: todosController.getById
+      handle: todosController.findById
+    },
+    {
+      path: '/',
+      method: 'POST',
+      handle: todosController.create
     },
     {
       path: '/:id',
