@@ -10,7 +10,7 @@ function getPathEnv(nodeEnv) {
 
 module.exports = {
   config() {
-    let path = getPathEnv(process.env.NODE_ENV)
+    const path = getPathEnv(process.env.NODE_ENV)
 
     dotenv.config({
       path
