@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  express-api-mongodb-boilerplate:
+    image: express-api-mongodb-boilerplate
+    container_name: express-api-mongodb-boilerplate
+    build: .
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    expose:
+      - ${PORT}
+    ports:
+      - '${PORT}:${PORT}'
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  db:
+    image: mongo
+    container_name: express-api-mongodb
+    restart: always
+    volumes:
+      - express-api-data:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
+
+volumes:
+  express-api-data:
+
+networks:
+  backend:
+    driver: bridge
