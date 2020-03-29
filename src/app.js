@@ -1,4 +1,7 @@
 const express = require('express')
+const dotenvConfig = require('./config/env')
+
+dotenvConfig.config()
 
 const app = express()
 
