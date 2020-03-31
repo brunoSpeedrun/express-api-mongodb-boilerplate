@@ -4,10 +4,12 @@ const compression = require('compression')
 const expressStatusMonitor = require('express-status-monitor')
 const morgan = require('morgan')
 const cors = require('cors')
-const router = require('../router')
+const router = require('./router')
+
+const requestTimeMiddleware = require('./middlewares/request-time.middleware')
 
 module.exports = {
-  apply(app) {
+  configureApp(app) {
     app.use(
       cors({
         allowedHeaders: '*',
@@ -23,6 +25,7 @@ module.exports = {
     app.use(morgan('dev'))
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
+    app.use(requestTimeMiddleware())
     router.config(app)
   }
 }

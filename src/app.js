@@ -1,13 +1,13 @@
 const express = require('express')
 const dotenvConfig = require('./config/env')
 const mongodbConfig = require('./config/mongodb')
-const middleware = require('./config/middleware')
+const startup = require('./startup')
 
 dotenvConfig.config()
 mongodbConfig.connect()
 
 const app = express()
 
-middleware.apply(app)
+startup.configureApp(app)
 
 module.exports = app

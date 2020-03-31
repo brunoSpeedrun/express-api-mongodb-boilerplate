@@ -1,4 +1,4 @@
-const todosController = require('../../../controllers/todos.controller')
+const todosController = require('../../controllers/todos.controller')
 
 module.exports = {
   path: '/todos',

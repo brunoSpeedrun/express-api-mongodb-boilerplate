@@ -2,6 +2,7 @@ const Todo = require('../models/todo')
 
 const todosController = {
   findAll(req, res, next) {
+    // eslint-disable-next-line array-callback-return
     Todo.find((err, docs) => {
       if (err) {
         next(err)

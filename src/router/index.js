@@ -1,13 +1,16 @@
+/* eslint-disable import/no-dynamic-require */
 const express = require('express')
 const fs = require('fs')
 
 function controllerRoute(file) {
   const expressRouter = express.Router()
 
+  // eslint-disable-next-line import/no-dynamic-require
+  // eslint-disable-next-line global-require
   const include = require(`./routes/${file}`)
 
   if (!include.path || !Array.isArray(include.routes)) {
-    return
+    return null
   }
 
   include.routes.forEach((route) => {
