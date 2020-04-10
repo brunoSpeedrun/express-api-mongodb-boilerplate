@@ -4,11 +4,17 @@ const compression = require('compression')
 const expressStatusMonitor = require('express-status-monitor')
 const morgan = require('morgan')
 const cors = require('cors')
+const dotenvConfig = require('./config/env')
+const mongodbConfig = require('./config/mongodb')
 const router = require('./router')
 
 const requestTimeMiddleware = require('./middlewares/request-time.middleware')
 
 module.exports = {
+  configureServices() {
+    dotenvConfig.config()
+    mongodbConfig.connect()
+  },
   configureApp(app) {
     app.use(
       cors({
